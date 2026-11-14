@@ -30,6 +30,7 @@ export function Header({ brandName, logoUrl }: { brandName: string; logoUrl: str
   }, [open]);
 
   return (
+    <>
     <header className="sticky top-0 z-40 border-b border-blush-100/70 bg-cream-50/85 backdrop-blur-lg">
       <div className="container-x flex h-16 items-center justify-between gap-3">
         <button className="btn-ghost -ml-2 px-2 lg:hidden" onClick={() => setOpen(true)} aria-label="Open menu">
@@ -67,7 +68,9 @@ export function Header({ brandName, logoUrl }: { brandName: string; logoUrl: str
         </div>
       </div>
 
-      {/* mobile drawer */}
+    </header>
+
+      {/* mobile drawer: outside <header> because backdrop-filter traps fixed children */}
       <div className={cn("fixed inset-0 z-50 lg:hidden", open ? "pointer-events-auto" : "pointer-events-none")}>
         <div className={cn("absolute inset-0 bg-ink/30 transition-opacity", open ? "opacity-100" : "opacity-0")} onClick={() => setOpen(false)} />
         <aside className={cn("absolute left-0 top-0 flex h-full w-[82%] max-w-sm flex-col bg-cream-50 p-5 shadow-2xl transition-transform duration-300", open ? "translate-x-0" : "-translate-x-full")}>
@@ -93,6 +96,6 @@ export function Header({ brandName, logoUrl }: { brandName: string; logoUrl: str
           </nav>
         </aside>
       </div>
-    </header>
+    </>
   );
 }

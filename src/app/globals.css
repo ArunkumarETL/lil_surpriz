@@ -2,26 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@layer base {
+  html { -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
+  body { @apply bg-cream-50 text-ink font-sans antialiased; overflow-x: hidden; }
+  h1, h2, h3, h4 { @apply font-display; }
+  input, select, textarea { font-size: 16px; } /* prevent iOS zoom */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@layer components {
+  .container-x { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
+  .btn { @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-primary { @apply btn bg-blush-500 text-white shadow-soft hover:bg-blush-600; }
+  .btn-secondary { @apply btn bg-lavender-100 text-lavender-600 hover:bg-lavender-200; }
+  .btn-outline { @apply btn border border-blush-300 bg-white text-blush-600 hover:bg-blush-50; }
+  .btn-ghost { @apply btn text-ink-soft hover:bg-blush-50; }
+  .btn-danger { @apply btn bg-red-500 text-white hover:bg-red-600; }
+  .btn-whatsapp { @apply btn bg-[#25D366] text-white hover:bg-[#1ebe5a]; }
+  .input { @apply w-full rounded-2xl border border-blush-100 bg-white px-4 py-3 text-ink placeholder:text-ink-faint outline-none transition focus:border-blush-300 focus:ring-4 focus:ring-blush-100; }
+  .label { @apply mb-1.5 block text-sm font-semibold text-ink; }
+  .card { @apply rounded-3xl bg-white shadow-card; }
+  .chip { @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold; }
+  .section-title { @apply font-display text-2xl font-bold text-ink sm:text-3xl; }
+  .prose-policy h2 { @apply mt-8 mb-3 text-xl font-bold; }
+  .prose-policy p, .prose-policy li { @apply leading-relaxed text-ink-soft; }
+  .prose-policy ul { @apply ml-5 list-disc space-y-1; }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
